@@ -3,7 +3,7 @@ namespace Storhn\Reporter\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class PackageServiceProvider extends ServiceProvider
+class ReporterServiceProvider extends ServiceProvider
 {
     public function boot()
     {
