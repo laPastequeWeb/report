@@ -7,3 +7,21 @@ The intended use is as follow :
 3. Your instructions will create a "project" on the other end and log each and every of your interaction.
 4. Do not hesitate to use the "emergency" tag when needed. So that for your in-prod project, you'll receive the logs AND an instant e-mail telling you what's going on.
 5. Follow and track what's happening on your live projects on a single app.
+
+
+Add this repo since it's not on packagist yet (but well, let me tell you, I don't recommend installing it yet since I'm just starting to making it lol)
+```
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/laPastequeWeb/report.git"
+    }
+  ]
+}
+```
+Also, when installed, publish the config file :
+REPORT_URL and REPORT_PASSWORD are required.
+```
+php artisan vendor:publish --tag=config-reporter
+```
