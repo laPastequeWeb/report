@@ -1,0 +1,30 @@
+{
+    "name": "storhn/reporter",
+    "description": "It's logs. But enhanced and grouped",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+      "psr-4": {
+        "Storhn\\Reporter\\Helpers\\": "src/Helpers/",
+        "Storhn\\Reporter\\Providers\\": "src/Providers/",
+        "Storhn\\Reporter\\Services\\": "src/Services/"
+      }
+    },
+    "require": {
+      "php": ">=8.1",
+      "illuminate/support": "^8.0|^9.0|^10.0"
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Storhn\\Reporter\\Providers\\ReporterServiceProvider"
+        ]
+      }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan package:discover --ansi"
+        ]
+    }
+  }
+  
