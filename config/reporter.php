@@ -3,4 +3,4 @@
 return [
     'url' => env('REPORT_URL', ''),
     'password' => env('REPORT_PASSWORD', ''),
-]
+];
