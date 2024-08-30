@@ -12,9 +12,10 @@ Trait Validator {
         'message' => 'string',
         'file' => 'string',
         'line' => 'int',
+        'date' => 'string',
     ];
 
-    protected $mandatoryKeys = ['project', 'level', 'message', 'timestamp'];
+    protected $mandatoryKeys = ['project', 'level', 'message', 'date'];
     
     protected function validateData(array $data): bool
     {
@@ -24,11 +25,11 @@ Trait Validator {
                 Log::error('Invalid data key: ' . $key);
                 return false;
             }
-            if (!$this->validateType($value, $this->allowedKeys[$key])) {
-                // Comme au dessus ?
-                Log::error("Invalid data type for key '{$key}': Expected {$this->allowedKeys[$key]}");
-                return false;
-            }
+            // if (!$this->validateType($value, $this->allowedKeys[$key])) {
+            //     // Comme au dessus ?
+            //     Log::error("Invalid data type for key '{$key}': Expected {$this->allowedKeys[$key]}");
+            //     return false;
+            // }
         }
 
         foreach ($this->mandatoryKeys as $key) {

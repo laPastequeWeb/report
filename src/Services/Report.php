@@ -28,27 +28,33 @@ class Report
 
     public function send($data)
     {
+        $data['date'] = now()->toDateTimeString();
+
         if (!$this->validateData($data)) {
             return;  // Stop execution if validation fails
         }
 
-        $data['timestamp'] = now()->toDateTimeString();
-
         try {
-
-            $this->client->postAsync($this->url, [
+            Log::error('Trying to send data to ' . $this->url . '/api/logs');
+            
+            $promise = $this->client->postAsync($this->url . '/api/logs', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->password,
                 ],
                 'json' => $data,
-            ])->then(
+            ]);
+
+            $promise->then(
                 function ($response) {
-                    // Success
+                    Log::error('Report presumably sent. Status code: ' . $response->getStatusCode());
+                    Log::error('Response body: ' . $response->getBody()->getContents());
                 },
                 function (RequestException $e) {
                     Log::error('Report failed: ' . $e->getMessage());
+                    Log::error('Request details: ' . $e->getRequest()->getBody());
                 }
-            );
+            )->wait(); // Wait for the promise to complete
+
         } catch (\Exception $e) {
             Log::error('Report failed: ' . $e->getMessage());
         }
