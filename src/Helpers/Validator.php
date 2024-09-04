@@ -7,6 +7,7 @@ Trait Validator {
 
     protected $allowedKeys = [
         'client' => 'string',
+        'client_url' => 'string',
         'project' => 'string',
         'level' => 'int',
         'message' => 'string',

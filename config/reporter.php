@@ -1,6 +1,9 @@
 <?php
 
 return [
-    'url' => env('REPORT_URL', ''),
-    'password' => env('REPORT_PASSWORD', '1234'),
+    'client' => env('REPORT_CLIENT_NAME', ''),
+    'client_url' => env('REPORT_CLIENT_URL', ''),
+    'dashboard_url' => env('REPORT_DASHBOARD_URL', ''),
+    'project' => env('REPORT_PROJECT', ''),
+    'password' => env('REPORT_ACCESS_TOKEN', ''),
 ];

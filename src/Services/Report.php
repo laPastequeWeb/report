@@ -12,8 +12,11 @@ class Report
     use Validator;
     
     protected $client;
-    protected $url;
+    protected $client_name;
+    protected $project;
     protected $password;
+    protected $client_url;
+    protected $dashboard_url;
 
     public function __construct()
     {
@@ -21,7 +24,10 @@ class Report
             'timeout' => 1.0,
         ]);
 
-        $this->url = config('reporter.url');
+        $this->client_name = config('reporter.client');
+        $this->project = config('reporter.project');
+        $this->client_url = config('reporter.client_url');
+        $this->dashboard_url = config('reporter.dashboard_url');
         $this->password = config('reporter.password');
 
     }
@@ -29,15 +35,18 @@ class Report
     public function send($data)
     {
         $data['date'] = now()->toDateTimeString();
+        $data['client'] = $this->client_name;
+        $data['project'] = $this->project;
+        $data['client_url'] = $this->client_url;
 
         if (!$this->validateData($data)) {
             return;  // Stop execution if validation fails
         }
 
         try {
-            Log::error('Trying to send data to ' . $this->url . '/api/logs');
+            Log::error('Trying to send data to ' . $this->dashboard_url . '/api/logs');
             
-            $promise = $this->client->postAsync($this->url . '/api/logs', [
+            $promise = $this->client->postAsync($this->dashboard_url . '/api/logs', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->password,
                 ],

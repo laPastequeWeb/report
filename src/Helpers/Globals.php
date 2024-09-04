@@ -3,8 +3,8 @@ namespace Storhn\Reporter\Helpers;
 
 use Storhn\Reporter\Services\Report;
 
-if (!function_exists('lpwreport')) {
-    function lpwreport($data): void
+if (!function_exists('_report')) {
+    function _report($data): void
     {
         (new Report())->send($data);
     }

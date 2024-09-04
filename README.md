@@ -21,7 +21,18 @@ Add this repo since it's not on packagist yet (but well, let me tell you, I don'
 }
 ```
 Also, when installed, publish the config file :
-REPORT_URL and REPORT_PASSWORD are required.
+
+REPORT_CLIENT_NAME="my customer"
+REPORT_PROJECT="my customer's project"
+REPORT_ACCESS_TOKEN="customer's access token"
+REPORT_CLIENT_URL="customer's website/tool/SaaS url"
+REPORT_DASHBOARD_URL="dashboard url (if custom)"
+
 ```
 php artisan vendor:publish --tag=config-reporter
+```
+
+In your controller (or in your service provider if you want to use it eveywhere without specifying it)
+```
+use function Storhn\Reporter\Helpers\_report;
 ```
