@@ -1,5 +1,4 @@
 <?php
-
 return [
     'client' => env('REPORT_CLIENT_NAME', ''),
     'client_url' => env('REPORT_CLIENT_URL', ''),

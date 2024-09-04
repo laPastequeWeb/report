@@ -4,19 +4,14 @@ namespace Storhn\Reporter\Helpers;
 use Storhn\Reporter\Services\Report;
 
 if (!function_exists('_report')) {
-    function _report($data): void
+    function _report(int $level, mixed $message): void
     {
-        (new Report())->send($data);
+        $caller = debug_backtrace()[0];
+        (new Report())->send([
+            'level' => $level,
+            'message' => $message,
+            'file' => $caller['file'],
+            'line' => $caller['line']
+        ]);
     }
 }
-/*
-Use it like this :
-report([
-    'client' => 'string', // optional
-    'project' => 'string',
-    'level' => 'int',
-    'message' => 'string',
-    'file' => 'string', // optional
-    'line' => 'int', // optional
-]);
-*/
